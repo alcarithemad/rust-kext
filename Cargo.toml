@@ -1,0 +1,21 @@
+[package]
+name = "kextauth"
+version = "0.1.0"
+authors = ["Colin Valliant <alcarithemad@gmail.com>"]
+
+[lib]
+
+[[bin]]
+name = "kext"
+path = "src/kext.rs"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.37"
