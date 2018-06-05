@@ -2,9 +2,9 @@
 #![feature(const_let)]
 #![cfg_attr(target_env="kext", no_std)]
 #![cfg_attr(target_env="kext", no_main)]
-extern crate kextauth;
-use kextauth::kernel;
-use kextauth::c_types;
+extern crate kext;
+use kext::kernel;
+use kext::c_types;
 
 #[cfg(not(target_env="kext"))]
 fn main() {

@@ -1,5 +1,5 @@
 [package]
-name = "kextauth"
+name = "kext"
 version = "0.1.0"
 authors = ["Colin Valliant <alcarithemad@gmail.com>"]
 
