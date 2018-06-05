@@ -15,6 +15,7 @@ pub type c_longlong = i64;
 pub type c_ulonglong = u64;
 pub type c_float = f32;
 pub type c_double = f64;
+
 // for a laugh, the comment accompanying c_void in src/libstd/os/raw/mod.rs
 #[repr(u8)]
 pub enum c_void {

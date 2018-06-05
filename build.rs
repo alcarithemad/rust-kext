@@ -10,7 +10,7 @@ struct MacroTyper;
 
 impl callbacks::ParseCallbacks for MacroTyper {
     fn int_macro(self: &Self, name: &str, value: i64) -> Option<callbacks::IntKind> {
-        if name.starts_with("KERN_") {
+        if name.starts_with("KERN_") || name.starts_with("KMOD_INFO_VERSION") {
             Some(callbacks::IntKind::I32)
         } else {
             None
@@ -27,6 +27,8 @@ fn main() {
     let bindings = bindgen::Builder::default()
         .use_core()
         .ctypes_prefix("c_types")
+        .rust_target(bindgen::RustTarget::Nightly)
+        .blacklist_type("kmod_info_t")
         .clang_arg("--target=x86_64-apple-darwin")
         .clang_arg("-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Kernel.framework/Versions/Current/Headers/")
         .parse_callbacks(macros)
