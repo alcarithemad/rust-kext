@@ -30,3 +30,36 @@ pub struct kmod_info_t {
     pub start: kext_init_fn,
     pub stop: kext_init_fn,
 }
+
+pub const fn transmute<S>(x: S) -> [u8; 64] {
+    #[allow(unions_with_drop_fields)]
+    union U<T> {
+        a: T,
+        b: [u8; 64]
+    }
+    unsafe { U { a: x }.b }
+}
+
+#[macro_export]
+macro_rules! simple_kmod_info {
+    (name: $name:expr,
+    version: $version:expr,
+    start: $start:ident,
+    stop: $stop:ident) => {
+        #[no_mangle]
+        pub static kmod_info: kernel::kmod_info_t = kernel::kmod_info_t{
+            next: 0,
+            info_version: kernel::KMOD_INFO_VERSION,
+            id: 0xffffffff,
+            name: $crate::kernel::transmute::<[u8; $name.len()]>(*$name),
+            version: $crate::kernel::transmute::<[u8; $version.len()]>(*$version),
+            reference_count: -1,
+            reference_list: 0,
+            address: 0,
+            size: 0,
+            hdr_size: 0,
+            start: $start,
+            stop: $stop,
+        };
+    };
+}

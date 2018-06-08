@@ -1,6 +1,7 @@
 #![feature(lang_items, core_intrinsics)]
 #![feature(allocator_api, global_allocator)]
 #![feature(repr_packed)]
+#![feature(const_fn, const_slice_len, untagged_unions)]
 #![cfg_attr(target_env="kext", no_std)]
 use core::intrinsics;
 pub mod c_types;
