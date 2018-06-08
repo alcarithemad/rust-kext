@@ -2,6 +2,7 @@ extern crate bindgen;
 
 use std::env;
 use std::path::PathBuf;
+use std::process::Command;
 
 use bindgen::callbacks;
 
@@ -18,11 +19,19 @@ impl callbacks::ParseCallbacks for MacroTyper {
     }
 }
 
+
 fn main() {
     // The bindgen::Builder is the main entry point
     // to bindgen, and lets you build up options for
     // the resulting bindings.
     println!("cargo:rerun-if-changed=wrapper.h");
+    let mut sdk_path = String::from_utf8(Command::new("xcrun")
+        .args(&["--sdk", "macosx", "--show-sdk-path"])
+        .output()
+        .expect("xcrun failed")
+        .stdout
+    ).expect("xcrun failed harder");
+    sdk_path.pop();
     let macros = Box::new(MacroTyper);
     let bindings = bindgen::Builder::default()
         .use_core()
@@ -30,7 +39,7 @@ fn main() {
         .rust_target(bindgen::RustTarget::Nightly)
         .blacklist_type("kmod_info_t")
         .clang_arg("--target=x86_64-apple-darwin")
-        .clang_arg("-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Kernel.framework/Versions/Current/Headers/")
+        .clang_arg(format!("-I{}/System/Library/Frameworks/Kernel.framework/Versions/Current/Headers/", sdk_path))
         .parse_callbacks(macros)
         // The input header we would like to generate
         // bindings for.
