@@ -38,6 +38,7 @@ fn main() {
         .ctypes_prefix("c_types")
         .rust_target(bindgen::RustTarget::Nightly)
         .blacklist_type("kmod_info_t")
+        .blacklist_type("embedded_panic_header")
         .clang_arg("--target=x86_64-apple-darwin")
         .clang_arg(format!("-I{}/System/Library/Frameworks/Kernel.framework/Versions/Current/Headers/", sdk_path))
         .parse_callbacks(macros)

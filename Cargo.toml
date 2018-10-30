@@ -18,4 +18,4 @@ panic = "abort"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.37"
+bindgen = "0.43"
