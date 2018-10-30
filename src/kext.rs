@@ -1,10 +1,10 @@
 #![cfg_attr(target_env="kext", no_std)]
 #![cfg_attr(target_env="kext", no_main)]
 #![feature(const_fn, const_slice_len, untagged_unions)]
-#[macro_use]
 extern crate kext;
 use kext::kernel;
 use kext::c_types;
+use kext::simple_kmod_info;
 
 #[cfg(not(target_env="kext"))]
 fn main() {
@@ -28,4 +28,5 @@ simple_kmod_info!(
     name: b"af.sd.kext",
     version: b"1.3",
     start: kext_start,
-    stop: kext_stop);
+    stop: kext_stop
+);
