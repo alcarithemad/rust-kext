@@ -3,7 +3,10 @@
 #![feature(repr_packed)]
 #![feature(const_fn_union)]
 #![feature(const_fn, const_slice_len, untagged_unions)]
+#![feature(const_transmute)]
 #![cfg_attr(target_env="kext", no_std)]
+#![warn(clippy::all)]
+#![warn(clippy::pedantic)]
 use core::intrinsics;
 use core::panic::PanicInfo;
 pub mod c_types;

@@ -16,6 +16,9 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
+kext_macros = { path = "kext_macros" }
 
 [build-dependencies]
 bindgen = "0.43"
+
+[workspace]

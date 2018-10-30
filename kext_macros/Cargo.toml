@@ -1,0 +1,18 @@
+[package]
+name = "kext_macros"
+version = "0.1.0"
+authors = ["Colin Valliant <alcarithemad@gmail.com>"]
+edition = "2018"
+workspace = "../"
+
+[lib]
+proc-macro = true
+crate-type = ["proc-macro"]
+
+[dependencies]
+quote = "0.6"
+proc-macro2 = "*"
+
+[dependencies.syn]
+version = "0.15"
+features = ["extra-traits", "fold", "full"]
