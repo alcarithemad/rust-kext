@@ -10,7 +10,7 @@ use bindgen::callbacks;
 struct MacroTyper;
 
 impl callbacks::ParseCallbacks for MacroTyper {
-    fn int_macro(self: &Self, name: &str, value: i64) -> Option<callbacks::IntKind> {
+    fn int_macro(self: &Self, name: &str, _value: i64) -> Option<callbacks::IntKind> {
         if name.starts_with("KERN_") || name.starts_with("KMOD_INFO_VERSION") {
             Some(callbacks::IntKind::I32)
         } else {
