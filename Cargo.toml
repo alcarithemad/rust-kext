@@ -5,10 +5,6 @@ authors = ["Colin Valliant <alcarithemad@gmail.com>"]
 
 [lib]
 
-[[bin]]
-name = "kext"
-path = "src/kext.rs"
-
 [profile.dev]
 panic = "abort"
 

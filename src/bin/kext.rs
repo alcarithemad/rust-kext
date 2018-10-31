@@ -1,7 +1,5 @@
 #![cfg_attr(target_env="kext", no_std)]
 #![cfg_attr(target_env="kext", no_main)]
-#![feature(const_fn, const_slice_len, const_transmute, untagged_unions)]
-#![feature(type_ascription)]
 #![feature(proc_macro_hygiene)]
 #![warn(clippy::all)]
 #![warn(clippy::pedantic)]
