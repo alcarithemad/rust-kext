@@ -1,9 +1,6 @@
-#![feature(lang_items, core_intrinsics)]
-#![feature(allocator_api)]
-#![feature(repr_packed)]
-#![feature(const_fn_union)]
-#![feature(const_fn, const_slice_len, untagged_unions)]
-#![feature(const_transmute)]
+#![feature(lang_items)]
+#![feature(core_intrinsics)] // required for core::intrinsics::abort() in panic handler
+#![feature(repr_packed)] // required for some bindgen'd types
 #![cfg_attr(target_env="kext", no_std)]
 #![warn(clippy::all)]
 #![warn(clippy::pedantic)]

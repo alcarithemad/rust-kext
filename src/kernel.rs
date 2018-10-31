@@ -33,7 +33,7 @@ pub struct kmod_info_t {
     pub stop: kext_init_fn,
 }
 
-#[macro_export(bytes_to_u8_64)]
+#[macro_export]
 macro_rules! simple_kmod_info {
     (name: $name:expr,
     version: $version:expr,
