@@ -4,6 +4,7 @@
 #![cfg_attr(target_env="kext", no_std)]
 #![warn(clippy::all)]
 #![warn(clippy::pedantic)]
+extern crate kext_macros;
 use core::intrinsics;
 use core::panic::PanicInfo;
 pub mod c_types;
