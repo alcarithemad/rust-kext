@@ -12,10 +12,18 @@ use syn::fold::Fold;
 struct BytesFolder();
 
 impl syn::fold::Fold for BytesFolder {
-    fn fold_lit_byte_str(&mut self, i: LitByteStr) -> LitByteStr {
-        let mut b = i.value().clone();
-        b.resize(64, 0);
-        LitByteStr::new(b.as_slice(), i.span())
+    fn fold_expr(&mut self, i: syn::Expr) -> syn::Expr {
+        match i {
+            syn::Expr::Lit(syn::ExprLit {attrs: _, lit: syn::Lit::ByteStr(b)}) => {
+                let mut v = b.value().clone();
+                v.resize(64, 0);
+                let v_final = proc_macro2::Literal::byte_string(v.as_slice());
+                syn::parse_quote!(*#v_final)
+            },
+            any => {
+                syn::fold::fold_expr(self, any)
+            }
+        }
     }
 }
 
@@ -24,5 +32,5 @@ pub fn bytes_to_u8_64(item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as syn::Expr);
     let mut folder = BytesFolder();
     let output = folder.fold_expr(input);
-    TokenStream::from(quote!(*#output))
+    TokenStream::from(quote::quote!(#output))
 }
